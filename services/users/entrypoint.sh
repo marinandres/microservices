@@ -1,6 +1,4 @@
-#!/bin/shcd..
-
- echo "Waiting for postgres..."
+echo "Waiting for postgres..."
 
 while ! nc -z users-db 5432; do
   sleep 0.1
