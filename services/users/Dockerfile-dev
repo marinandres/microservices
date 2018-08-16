@@ -1,5 +1,5 @@
 # base image
-FROM python:3.6.5-alpine
+FROM python:3.6.3-alpine
 
 # new
 # install dependencies
@@ -9,6 +9,7 @@ RUN apk update && \
     apk add netcat-openbsd
 
 # set working directory
+RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 # add and install requirements
@@ -18,7 +19,7 @@ RUN pip install -r requirements.txt
 # new
 # add entrypoint.sh
 COPY ./entrypoint.sh /usr/src/app/entrypoint.sh
-RUN chmod -R 755 /usr/src/app/entrypoint.sh
+RUN chmod 755 /usr/src/app/entrypoint.sh
 
 # add app
 COPY . /usr/src/app
