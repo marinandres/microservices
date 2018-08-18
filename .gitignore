@@ -1,6 +1,5 @@
 __pycache__
 env
-Dockerfile-dev
 Dockerfile-prod
 htmlcov
 .gitignore
