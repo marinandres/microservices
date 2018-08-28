@@ -28,8 +28,16 @@ class App extends Component {
   };
   addUser(event) {
     event.preventDefault();
-    console.log('sanity check!');
-    console.log(this.state);
+    const data = {
+        username: this.state.username,
+        email: this.state.email
+    };
+    axios.post(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`, data)
+        .then((res) => {
+           this.getUsers(); // new
+           this.setState({ username: '', email: '' }); //new
+        })
+        .catch((err) => { console.log(err); });
   };
   handleChange(event) {
     const obj = {};
@@ -51,35 +59,12 @@ class App extends Component {
             addUser={this.addUser}
             handleChange={this.handleChange}  // new
             />
-            // new
             <br/><br/>  {/* new */}
             <UsersList users={this.state.users}/>
         </div>
        </div>
       </div>
     </section>
-  <div className="field">
-  <input
-    name="username"
-    className="input is-large"
-    type="text"
-    placeholder="Enter a username"
-    required
-    value={props.username}
-    onChange={props.handleChange}  // new
-  />
-  </div>
-  <div className="field">
-    <input
-     name="email"
-     className="input is-large"
-     type="email"
-     placeholder="Enter an email address"
-     required
-     value={props.email}
-     onChange={props.handleChange}  // new
-     />
-  </div>
   )
   };
 }
